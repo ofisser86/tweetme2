@@ -41,6 +41,7 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
         data['content'] = obj.content
     except Exception:
         data['message'] = "Not found"
+        # writes to headers status
         status = 404
 
     return JsonResponse(data, status=status)
