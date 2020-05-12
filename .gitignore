@@ -262,3 +262,5 @@ fabric.properties
 # Ignore all local history of files
 .history
 # End of https://www.gitignore.io/api/django,python,pycharm,visualstudiocode
+
+# Custom
