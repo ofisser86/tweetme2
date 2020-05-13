@@ -7,8 +7,12 @@
 
 {% block content %}
       <h1>Welcome to TweetMe </h1>
-
+    <div id="tweets">
+    Replace me
+    </div>
     <script>
+    const tweetsElements = document.getElementById('tweets')
+    tweetsElements.innerHTML = 'Loading...'
     const xhr = new  XMLHttpRequest()
     const method = 'GET'
     const url = 'tweets'
@@ -18,7 +22,14 @@
     xhr.open(method, url)
     xhr.onload = function () {
         const serverResponse = xhr.response
-        var listedItems = serverResponse.response
+        const listedItems = serverResponse.response
+        var finalTweetStr = ''
+        var i;
+        for(i=0;i<listedItems.length;i++){
+            console.log(i)
+            console.log(listedItems[i])
+        }
+
         console.log(listedItems)
 
 
