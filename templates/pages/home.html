@@ -85,8 +85,10 @@
                 } else if (xhr.status === 500){
                     const errorJson = xhr.response
                     alert("An error << 500 >> occurred, please try again later")
+                } else if (xhr.status === 401) {
+                    alert("You have to login!")
+                    window.location.href = '/login'
                 }
-
 
         }
             xhr.onerror = function(){
