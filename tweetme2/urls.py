@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path
 
 from tweets.views import (
-    home_view, tweet_detail_view, tweets_list_view, tweet_create_view
-                           )
+    home_view,
+    tweet_detail_view,
+    tweets_list_view,
+    tweet_create_view,
+    tweet_delete_view
+                        )
 
 
 urlpatterns = [
@@ -26,5 +30,7 @@ urlpatterns = [
     path('tweets', tweets_list_view, name='tweets_list'),
     path('create-tweet', tweet_create_view, name='create-tweet'),
     path('tweet/<int:tweet_id>', tweet_detail_view, name='tweet_detail'),
+    path('api/tweet/<int:tweet_id>/delete', tweet_delete_view, name='tweet_delete'),
+
     path('admin/', admin.site.urls),
 ]

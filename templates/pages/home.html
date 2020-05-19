@@ -88,6 +88,9 @@
                 } else if (xhr.status === 401) {
                     alert("You have to login!")
                     window.location.href = '/login'
+                } else if (xhr.status === 403) {
+                    alert("You have to login!")
+                    window.location.href = '/login'
                 }
 
         }
@@ -117,7 +120,7 @@
 
             xhr.onload = function () {
                 const serverResponse = xhr.response
-                const listedItems = serverResponse.response
+                const listedItems = serverResponse
                 var finalTweetStr = ''
                 var i;
                 for (i = 0; i < listedItems.length; i++) {
