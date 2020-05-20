@@ -27,8 +27,12 @@ SECRET_KEY = '_lu*_8&a3$_l2f1pc@d*=5f*dz6#%!znsh(($w*fc6_se0nlas'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 LOG_IN_URL = '/login'
 MAX_TWEET_LENGTH = 240
+TWEET_ACTION_OPTIONS = ['like',
+                        'unlike',
+                        'retweet']
 
 # Application definition
 
