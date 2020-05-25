@@ -8,7 +8,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .serializers import TweetSerializer, TweetActionSerializer
+from .serializers import (
+    TweetSerializer,
+    TweetActionSerializer,
+    TweetCreateSerializer
+                          )
 
 from .forms import TweetForm
 
@@ -20,14 +24,13 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    print(request.user)
     return render(request, 'templates/pages/home.html', context={}, status=200)
 
 
 @api_view(['POST'])  # http method on client side == POST
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
-    serializer = TweetSerializer(data=request.POST or None)
+    serializer = TweetCreateSerializer(data=request.POST or None)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data)
@@ -76,6 +79,7 @@ def tweet_action_view(request, *args, **kwargs):
         data = serializer.validated_data
         tweet_id = data.get('id')
         action = data.get('action')
+        content = data.get('content')
         qs = Tweet.objects.filter(id=tweet_id)
 
         if not qs.exists():
@@ -89,7 +93,13 @@ def tweet_action_view(request, *args, **kwargs):
             obj.likes.remove(request.user)
         elif action == 'retweet':
             # Todo: create retweet action
-            pass
+            new_tweet = Tweet.objects.create(
+                user=request.user,
+                parent=obj,
+                content=content
+            )
+            serializer = TweetSerializer(new_tweet)
+            return Response(serializer.data, status=200)
     return Response({}, status=200)
 
 
