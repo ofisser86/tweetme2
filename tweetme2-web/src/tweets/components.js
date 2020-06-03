@@ -3,6 +3,32 @@ import React, {useEffect, useState}  from 'react'
 import {loadTweets} from '../lookup'
 
 
+export function TweetsComponent(props){
+    const texAreaRef = React.createRef()
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const newVal = texAreaRef.current.value
+        console.log(event)
+        console.log(newVal)
+        texAreaRef.current.value = ''
+    }
+    return(
+    <div className={props.className}>
+        <div className='col-md-12 mb-3'>
+            <form onSubmit={handleSubmit}>
+                <textarea ref={texAreaRef} required={true} className="form-control" >
+
+                </textarea>
+            <button type="submit" className="btn btn-primary my-3" name="tweet">Tweet</button>
+            </form>
+
+        </div>
+        <TweetsList />
+    </div>
+
+    )
+}
+
 export function TweetsList(props) {
     const [tweets, setTweets] = useState([])
 
