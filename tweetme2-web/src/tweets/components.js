@@ -5,11 +5,17 @@ import {loadTweets} from '../lookup'
 
 export function TweetsComponent(props){
     const texAreaRef = React.createRef()
+    const [newTweets, setNewTweets] = useState([])
     const handleSubmit = (event) => {
         event.preventDefault()
         const newVal = texAreaRef.current.value
-        console.log(event)
-        console.log(newVal)
+        let tempNewTweets = [...newTweets]
+        tempNewTweets.unshift({
+            content: newVal,
+            likes: 0,
+            id: 1233213,
+        })
+        setNewTweets(tempNewTweets)
         texAreaRef.current.value = ''
     }
     return(
@@ -23,7 +29,7 @@ export function TweetsComponent(props){
             </form>
 
         </div>
-        <TweetsList />
+        <TweetsList newTweets={newTweets}/>
     </div>
 
     )
@@ -33,6 +39,14 @@ export function TweetsList(props) {
     const [tweetsInit, setTweetsInit] = useState([])
     const [tweets, setTweets] = useState([])
     const [tweetsDidSet, setTweetsDidSet] = useState(false)
+    useEffect(()=>{
+        const final = [...props.newTweets].concat(tweetsInit)
+        if (final.length !== tweets.length){
+            setTweets(final)
+
+        }
+    }, [props.newTweets, tweets, tweetsInit])
+
     useEffect(() => {
       if (tweetsDidSet === false){
           const myCallback = (response, status) => {
