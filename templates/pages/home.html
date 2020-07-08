@@ -6,13 +6,16 @@
 
 
 {% block content %}
-    <div class="row text-center">
+    <div id="tweetMe-2"></div>
+
+
+    <div class="row text-center d-none">
         <div class="col">
             <h1>Welcome to TweetMe </h1>
         </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3 d-none">
     <div class="col-md-4 mx-auto col-10">
         <form method="post" id="tweet-create-form" action="/create-tweet">{% csrf_token %}
             <div class="d-none alert alert-danger" id="tweet-create-form-error"></div>
@@ -26,7 +29,7 @@
 
     </div>
 
-    <div class="row" id="tweets">
+    <div class="row d-none" id="tweets">
         Replace me
     </div>
     <script>
