@@ -36,7 +36,7 @@ export function TweetsComponent(props){
 }
 
 export function TweetsList(props) {
-    const [tweetsInit, setTweetsInit] = useState([])
+    const [tweetsInit, setTweetsInit] = useState(props.newTweets ? props.newTweets : [])
     const [tweets, setTweets] = useState([])
     const [tweetsDidSet, setTweetsDidSet] = useState(false)
     useEffect(()=>{
@@ -51,6 +51,8 @@ export function TweetsList(props) {
       if (tweetsDidSet === false){
           const myCallback = (response, status) => {
             if (status === 200){
+              // const finalTweetsInit = [...response].concat(tweetsInit)
+              // setTweetsInit(finalTweetsInit)
               setTweetsInit(response)
               setTweetsDidSet(true)
             } else {
