@@ -15,7 +15,7 @@ function getCookie(name) {
 }
 
 
-function lookup(method, endpoint, callback, data) {
+export function backendLookup(method, endpoint, callback, data) {
   let jsonData;
   if (data){
     jsonData = JSON.stringify(data)
@@ -27,13 +27,13 @@ function lookup(method, endpoint, callback, data) {
   xhr.open(method, url)
 
   xhr.setRequestHeader("Content-Type", "application/json")
-  xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
+  // xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
 
-  if (csrftoken){
-    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-    xhr.setRequestHeader("X-CSRFToken", csrftoken)
-  }
+  // if (csrftoken){
+  //   xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+  //   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+  //   xhr.setRequestHeader("X-CSRFToken", csrftoken)
+  // }
 
   xhr.onload = function() {
     callback(xhr.response, xhr.status)
@@ -43,12 +43,4 @@ function lookup(method, endpoint, callback, data) {
     callback({"message": "The request was an error"}, 400)
   }
   xhr.send(jsonData)
-}
-
-export function createTweet(newTweet, callback){
-  lookup("POST", "/tweets/create/", callback, {content: newTweet})
-}
-
-export function loadTweets(callback) {
-    lookup("GET", "/tweets/", callback)
 }
