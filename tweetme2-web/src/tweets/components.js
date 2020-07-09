@@ -1,7 +1,6 @@
 import React, {useEffect, useState}  from 'react'
 
 import {apiTweetList, apiTweetCreate} from './lookup'
-import {backendLookup} from "../lookup";
 
 export function TweetsComponent(props) {
     const textAreaRef = React.createRef()
