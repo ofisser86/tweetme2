@@ -26,7 +26,7 @@ SECRET_KEY = '_lu*_8&a3$_l2f1pc@d*=5f*dz6#%!znsh(($w*fc6_se0nlas'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOG_IN_URL = '/login'
 MAX_TWEET_LENGTH = 240
@@ -139,8 +139,10 @@ STATICFILES_DIRS = [
 # Emulate static server
 STATIC_ROOT = os.path.join(BASE_DIR, 'static-root')
 
+# CORS
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
+CORS_ALLOW_CREDENTIALS = True
 
 
 DEFAULT_RENDERER_CLASSES = [
@@ -154,9 +156,9 @@ if DEBUG:
     DEFAULT_RENDERER_CLASSES += [
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
-    # DEFAULT_AUTHENTICATION_CLASSES += [
-    #     'tweetme2.rest_api.dev.DevAuthentication'
-    # ]
+    DEFAULT_AUTHENTICATION_CLASSES += [
+        'tweetme2.rest_api.dev.DevAuthentication'
+    ]
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
