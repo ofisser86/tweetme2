@@ -22,26 +22,35 @@ from django.views.generic import TemplateView
 
 from tweets.views import (
     home_view,
+    local_tweets_list_view,
+    tweet_action_view,
+    local_tweets_detail_view,
+    tweet_delete_view,
+    local_tweets_profile_view,
     tweet_detail_view,
     tweets_list_view,
     tweet_create_view,
-    tweet_delete_view,
-    tweet_action_view
-                        )
+)
 
 
 urlpatterns = [
-    path('', home_view, name='home'),
+    path('admin/', admin.site.urls),
+    path('', local_tweets_list_view),
     path('react', TemplateView.as_view(template_name='react.html')),
-    path('tweets', tweets_list_view, name='tweets_list'),
-    path('create-tweet', tweet_create_view, name='create-tweet'),
-    path('tweet/<int:tweet_id>', tweet_detail_view, name='tweet_detail'),
+    path('<int:tweet_id>', local_tweets_detail_view),
+    path('create-tweet', tweet_create_view),
+    path('profile/<str:username>', local_tweets_profile_view),
+
+    # path('', home_view, name='home'),
+    # path('tweets', tweets_list_view, name='tweets_list'),
+    # path('create-tweet', tweet_create_view, name='create-tweet'),
+    # path('tweet/<int:tweet_id>', tweet_detail_view, name='tweet_detail'),
     # path('api/tweet/action', tweet_action_view, name='tweet_action'),
     # path('api/tweet/<int:tweet_id>/delete', tweet_delete_view, name='tweet_delete'),
     path('api/tweets/', include('tweets.urls')),
 
 
-    path('admin/', admin.site.urls),
+
 ]
 
 if settings.DEBUG:
