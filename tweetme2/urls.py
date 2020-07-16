@@ -27,7 +27,7 @@ from accounts.views import (
 from tweets.views import (
     tweets_list_view,
     tweets_detail_view,
-    tweets_profile_view,
+    tweets_detail_view,
 )
 
 urlpatterns = [
