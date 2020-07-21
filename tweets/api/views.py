@@ -93,7 +93,7 @@ def tweet_action_view(request, *args, **kwargs):
 
 def get_paginated_queryset_response(qs, request):
     paginator = PageNumberPagination()
-    paginator.page_size = 20
+    paginator.page_size = 5
     paginated_qs = paginator.paginate_queryset(qs, request)
     serializer = TweetSerializer(paginated_qs, many=True)
     return paginator.get_paginated_response(serializer.data)  # Response( serializer.data, status=200)
@@ -111,7 +111,7 @@ def tweet_feed_view(request, *args, **kwargs):
 def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()
     username = request.GET.get('username')  # ?username=Justin
-    if username != None:
+    if username is not None:
         qs = qs.by_username(username)
     return get_paginated_queryset_response(qs, request)
 
