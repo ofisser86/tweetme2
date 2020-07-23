@@ -25,6 +25,7 @@ from accounts.views import (
 )
 
 from tweets.views import (
+    home_view,
     tweets_list_view,
     tweets_detail_view,
     tweets_detail_view,
@@ -32,7 +33,8 @@ from tweets.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', tweets_list_view),
+    path('global/', tweets_list_view),
+    path('', home_view, name='home'),
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
@@ -41,7 +43,6 @@ urlpatterns = [
     path('api/tweets/', include('tweets.api.urls')),
     re_path(r'api/profiles?/', include('profiles.api.urls')),
 
-    # path('', home_view, name='home'),
 
     # path('react', TemplateView.as_view(template_name='react.html')),
 
