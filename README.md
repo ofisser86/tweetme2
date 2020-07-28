@@ -32,9 +32,3 @@ Admin endpoint is at http://127.0.0.1:8000/admin/
 ```bash
 python manage.py createsuperuser
 ```
-## Testing
-
-### Run tests:
-```bash
-python manage.py test
-```
