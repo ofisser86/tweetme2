@@ -11,8 +11,8 @@ User = get_user_model()
 
 class TweetTestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='cfe', password='somepassword')
-        self.userb = User.objects.create_user(username='cfe-2', password='somepassword2')
+        self.user = User.objects.create_user(username='didi', password='somepassword')
+        self.userb = User.objects.create_user(username='didi-2', password='somepassword2')
         Tweet.objects.create(content="my first tweet",
                              user=self.user)
         Tweet.objects.create(content="my first tweet",
@@ -42,7 +42,7 @@ class TweetTestCase(TestCase):
         client = self.get_client()
         response = client.get("/api/tweets/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()), 3)
+        self.assertEqual(len(response.json()), 4)
 
     def test_tweets_related_name(self):
         user = self.user
